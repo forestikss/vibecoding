@@ -1,4 +1,4 @@
-вая ссылка и import os
+import os
 import time
 import subprocess
 
