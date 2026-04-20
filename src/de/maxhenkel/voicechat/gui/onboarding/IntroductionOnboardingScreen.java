@@ -1,0 +1,50 @@
+package de.maxhenkel.voicechat.gui.onboarding;
+
+import com.mojang.blaze3d.matrix.MatrixStack;
+import de.maxhenkel.voicechat.intercompatibility.CommonCompatibilityManager;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
+
+import javax.annotation.Nullable;
+
+public class IntroductionOnboardingScreen extends OnboardingScreenBase {
+
+    private static final ITextComponent TITLE = new TranslationTextComponent("message.voicechat.onboarding.introduction.title", CommonCompatibilityManager.INSTANCE.getModName()).mergeStyle(TextFormatting.BOLD);
+    private static final ITextComponent DESCRIPTION = new TranslationTextComponent("message.voicechat.onboarding.introduction.description");
+    private static final ITextComponent SKIP = new TranslationTextComponent("message.voicechat.onboarding.introduction.skip");
+
+    public IntroductionOnboardingScreen(@Nullable Screen previous) {
+        super(TITLE, previous);
+    }
+
+    @Override
+    protected void init() {
+
+    }
+
+    @Override
+    public Screen getNextScreen() {
+        return new MicOnboardingScreen(this);
+    }
+
+    @Override
+    public void render(MatrixStack stack, int mouseX, int mouseY, float partialTicks) {
+        super.render(stack, mouseX, mouseY, partialTicks);
+        width = Minecraft.getInstance().getMainWindow().getScaledWidth();
+        height = Minecraft.getInstance().getMainWindow().getScaledHeight(); font = Minecraft.getInstance().fontRenderer; minecraft = Minecraft.getInstance();
+
+/*        Button skipButton = new Button(guiLeft, guiTop + contentHeight - BUTTON_HEIGHT * 2 - PADDING, contentWidth, BUTTON_HEIGHT, SKIP, button -> {
+            Minecraft.getInstance().displayGuiScreen(new SkipOnboardingScreen(IntroductionOnboardingScreen.this));
+        });
+        addButton(skipButton);*/
+
+        addBackOrCancelButton();
+        addNextButton();
+        renderTitle(stack, TITLE);
+        renderMultilineText(stack, DESCRIPTION);
+    }
+
+}
