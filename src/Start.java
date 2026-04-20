@@ -34,7 +34,7 @@ public class Start {
     public static void main(String[] args) {
         // Данные пользователя — замени на свои
         UserAPI.username = "DevPlayer";
-        UserAPI.uid = 0;
+        UserAPI.uid = 1337;
         UserAPI.role = "dev";
         UserAPI.beta = true;
 
